@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>СУРВ</title>
+</head>
+<body bgcolor="#ffebcd">
+<table width="100%" height="100%" border="2px">
+    <tr height="30%">
+        <td colspan="2">
+            <center><b><h1> Система учета рабочего времени </h1></b></font></center>
+        </td>
+    </tr>
+    <tr height="70%">
+        <td width="20%" valign="top">
+            <a href="index?employee_id={{employee_id}}">Главная страница</a>
+            <br>
+            > Создание отсутствия
+            <br>
+            <a href="show_absence?employee_id={{employee_id}}">Просмотр отсутствия</a>
+            <br>
+            <a href="apply_absence?employee_id={{employee_id}}">Подтверждение отсутствия</a>
+            <br>
+            <a href="look_over_tabel?employee_id={{employee_id}}">Просмотр табеля</a>
+            <br>
+            <a href="/">Выйти</a>
+        </td>
+        <td valign="top" align="justify">
+            <form name="create_absence" method="post" action="create_absence?employee_id={{employee_id}}">
+                <p>
+                    <b>Тип планируемого отсутствия:</b><br>
+                    <input type="radio" name="event_type" value="weekend">Выходной<br>
+                    <input type="radio" name="event_type" value="vacation">Отпуск<br>
+                    <input type="radio" name="event_type" value="business_trip">Командировка<br>
+                    <input type="radio" name="event_type" value="sick">Больничный<br>
+                    <input type="radio" name="event_type" value="strike">Забастовка<br>
+                </p>
+                <p>
+                    <b>Даты отсутствия:</b><br>
+                    С:&nbsp;&nbsp; <input type="date" name="from_dt"><br>
+                    По: <input type="date" name="to_dt">
+                </p>
+                <p>
+                    Комментарий<br>
+                    <textarea name="content" cols="50" rows="4"></textarea>
+                </p>
+                <p>
+                    <input type="submit" value="Отправить">
+                    <input type="reset" value="Очистить">
+                </p>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

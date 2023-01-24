@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>СУРВ</title>
+</head>
+<body bgcolor="#ffebcd">
+<div id="data"></div>
+<table width="100%" height="100%" border="2px">
+    <tr height="30%">
+        <td colspan="2">
+            <center><b><h1> Система учета рабочего времени </h1></b></font></center>
+        </td>
+    </tr>
+    <tr height="70%">
+        <td width="20%" valign="top">
+            <a href="index?employee_id={{employee_id}}">Главная страница</a>
+            <br>
+            <a href="create_absence?employee_id={{employee_id}}">Создание отсутствия</a>
+            <br>
+            <a href="show_absence?employee_id={{employee_id}}">Просмотр отсутствия</a>
+            <br>
+            > Подтверждение отсутствия
+            <br>
+            <a href="look_over_tabel?employee_id={{employee_id}}">Просмотр табеля</a>
+            <br>
+            <a href="/">Выйти</a>
+        </td>
+        <td valign="top" align="justify">
+            <table bgcolor="#f0f8ff" border="1px">
+                <tr>
+                    <th>ФИО</th>
+                    <th>Причина отсутствия</th>
+                    <th>Дата начала</th>
+                    <th>Дата окончания</th>
+                    <th>Описание</th>
+                    <th>Статус</th>
+                    <th>Выбор</th>
+                </tr>
+
+                {% for row in data %}
+                <tr>
+                    <td>{{row[1].name}}</td>
+                    <td>{{row[0].event.value}}</td>
+                    <td>{{row[0].from_dt.date()}}</td>
+                    <td>{{row[0].to_dt.date()}}</td>
+                    <td>{{row[0].content}}</td>
+                    <td>{{row[0].status.value}}</td>
+                    <td>
+                        <form name="update_request_status_ok" method="post" action="update_request_status">
+                            <input type="hidden" name="request_id" value={{row[0].id}}>
+                            <input type="submit" name="status" value="Принять"/>
+                        </form>
+                        <form name="update_request_status_canceled" method="post" action="update_request_status">
+                            <input type="hidden" name="request_id" value={{row[0].id}}>
+                            <input type="submit" name="status" value="Отклонить"/>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
